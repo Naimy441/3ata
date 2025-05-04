@@ -30,7 +30,7 @@ export default function Stats() {
         <div className="grid grid-cols-3 md:grid-cols-3 gap-8 text-center">
           {stats.map((stat, index) => (
             <div key={index} className="flex flex-col items-center">
-              <p className="text-4xl md:text-5xl font-bold text-purple-800">
+              <p className="text-3xl md:text-5xl font-bold text-purple-800">
                 {startCount ? (
                   <CountUp
                     end={stat.value}
