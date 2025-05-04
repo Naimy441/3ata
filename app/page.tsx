@@ -1,10 +1,14 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle2 } from "lucide-react"
-import PricingDialog from "../components/ui/pricing-dialog"
-import Navbar from "../components/ui/navbar"
-import Footer from "../components/ui/footer"
+import { CheckCircle2, Contact } from "lucide-react"
+import FreeDialog from "../components/free-pricing-dialog"
+import Navbar from "../components/navbar"
+import Footer from "../components/footer"
+import ClientsMarquee from "@/components/marquee"
+import Stats from "@/components/stats"
+import ContactModal from "@/components/contact-us"
+import PremiumDialog from "@/components/premium-pricing-dialog"
 
 export default function Home() {
   return (
@@ -23,16 +27,20 @@ export default function Home() {
                 Custom mobile apps designed specifically for mosques, making community engagement simpler and more
                 effective.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-6 text-lg">
-                  Get Started
-                </Button>
-                <Button
-                  variant="outline"
-                  className="border-purple-600 text-purple-600 hover:bg-purple-50 px-8 py-6 text-lg"
-                >
-                  Learn More
-                </Button>
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <a href="#pricing">
+                  <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-6 text-lg">
+                    Get Started
+                  </Button>
+                </a>
+                <a href="#features">
+                  <Button
+                    variant="outline"
+                    className="border-purple-600 text-purple-600 hover:bg-purple-50 px-8 py-6 text-lg"
+                  >
+                    Learn More
+                  </Button>
+                </a>
               </div>
             </div>
             <div className="md:w-1/2">
@@ -48,47 +56,19 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
-      {/* Our Vision Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Our Vision</h2>
-          <p className="text-lg text-gray-700 mb-8">
-            At 3ata, our mission is to empower mosques with the tools they need to strengthen community connections
-            through modern technology. We envision a future where every mosque has a mobile app that brings the
-            community closer to the mosque and each other.
-          </p>
-          <div className="flex justify-center">
-              <video
-                src="/demo.mp4"
-                width={600}
-                height={600}
-                className="rounded-xl shadow-xl"
-                autoPlay
-                muted
-                playsInline
-              />
-            </div>
+      {/* Statistics  */}
+      < section id="statistics" className="py-20 px-4 bg-purple-50" >
+        <div className="container mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-10 text-center">Tried & Trusted</h2>
+          <Stats />
+          <ClientsMarquee />
         </div>
-      </section>
-
-      {/* Our Journey Section */}
-      <section className="py-20 px-4 bg-purple-50">
-        <div className="container mx-auto max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6 text-center">Our Journey</h2>
-          <p className="text-lg text-gray-700 mb-8">
-            Our journey began with Masjid At-Taqwa in Sugar Land, TX, creating a custom app tailored to our local
-            community. Since then, we've expanded to serve mosques across the U.S., including in North Carolina. We now
-            offer fully custom mobile app solutions at just $50 per month, providing unmatched value for a professional,
-            tailored product. For those with tighter budgets, we also offer free mobile apps with your branding and
-            nearly all the features of our premium plan.
-          </p>
-        </div>
-      </section>
+      </section >
 
       {/* Features Section */}
-      <section className="py-20 px-4 bg-white">
+      < section id="features" className="py-20 px-4 bg-white" >
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-12 text-center">
             Features Designed for Your Mosque
@@ -146,7 +126,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-semibold text-purple-900 mb-2">Modern</h3>
               <p className="text-gray-600">
-                Feature-rich tools like in-app donations, event management, and prayer time notifications.
+                Feature-rich tools like donation flows, event management, and prayer time notifications.
               </p>
             </div>
 
@@ -216,10 +196,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 px-4 bg-purple-50">
+      < section id="pricing" className="py-20 px-4 bg-purple-50" >
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-4 text-center">
             Simple, Transparent Pricing
@@ -247,24 +227,28 @@ export default function Home() {
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="h-5 w-5 text-purple-500 mr-2 mt-0.5" />
-                    <span>Prayer times and notifications</span>
+                    <span>Custom links to your website + donation links</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="h-5 w-5 text-purple-500 mr-2 mt-0.5" />
-                    <span>Basic event calendar</span>
+                    <span>Prayer & jummah times + notifications</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="h-5 w-5 text-purple-500 mr-2 mt-0.5" />
-                    <span>Community announcements</span>
+                    <span>Interactive event calendar & news</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="h-5 w-5 text-purple-500 mr-2 mt-0.5" />
-                    <span>Standard support</span>
+                    <span>Admin dashboard and robust configurations</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle2 className="h-5 w-5 text-purple-500 mr-2 mt-0.5" />
+                    <span>Qiblah + Ask the imam form + Announcements</span>
                   </li>
                 </ul>
               </CardContent>
               <CardFooter>
-                <PricingDialog />
+                <FreeDialog />
               </CardFooter>
             </Card>
 
@@ -280,6 +264,11 @@ export default function Home() {
                   <span className="text-4xl font-bold text-purple-900">$50</span>
                   <span className="text-gray-600 ml-1">/month</span>
                 </div>
+                <div className="mt-2">
+                  <span className="inline-block bg-purple-100 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full">
+                    14-day free trial
+                  </span>
+                </div>
               </CardHeader>
               <CardContent className="pb-4">
                 <ul className="space-y-3">
@@ -289,28 +278,24 @@ export default function Home() {
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="h-5 w-5 text-purple-500 mr-2 mt-0.5" />
-                    <span>In-app donations</span>
+                    <span>Custom feature development</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="h-5 w-5 text-purple-500 mr-2 mt-0.5" />
-                    <span>Advanced event management</span>
+                    <span>Custom & unique user interface</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="h-5 w-5 text-purple-500 mr-2 mt-0.5" />
-                    <span>Community forums</span>
+                    <span>Custom donations flow</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="h-5 w-5 text-purple-500 mr-2 mt-0.5" />
                     <span>Priority support</span>
                   </li>
-                  <li className="flex items-start">
-                    <CheckCircle2 className="h-5 w-5 text-purple-500 mr-2 mt-0.5" />
-                    <span>Custom feature development</span>
-                  </li>
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">Get Started</Button>
+                <PremiumDialog />
               </CardFooter>
             </Card>
           </div>
@@ -319,21 +304,27 @@ export default function Home() {
             <p>No contracts. Cancel anytime. We're confident you'll love our service.</p>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Call to Action */}
-      <section className="py-20 px-4 bg-purple-800 text-white">
+      < section className="py-20 px-4 bg-purple-800 text-white" >
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Us in Transforming Mosque Communities</h2>
           <p className="text-lg mb-8 text-purple-100">
             With Allah's (SWT) help, we aim to make this vision a reality for every mosque. Join us in transforming the
             way communities connect with their mosques.
           </p>
-          <Button className="bg-white text-purple-800 hover:bg-purple-100 px-8 py-6 text-lg">Contact Us Today</Button>
+          <ContactModal
+            trigger={
+              <Button className="bg-white text-purple-800 hover:bg-purple-100 px-8 py-6 text-lg">
+                Contact Us
+              </Button>
+            }
+          />
         </div>
-      </section>
+      </section >
 
       <Footer />
-    </div>
+    </div >
   )
 }

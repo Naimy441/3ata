@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import Link from "next/link"
+import ContactModal from "./contact-us"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -21,16 +23,22 @@ export default function Navbar() {
             <a href="#" className="text-gray-700 hover:text-purple-600">
               Home
             </a>
-            <a href="#" className="text-gray-700 hover:text-purple-600">
+            <a href="#features" className="text-gray-700 hover:text-purple-600">
               Features
             </a>
             <a href="#pricing" className="text-gray-700 hover:text-purple-600">
               Pricing
             </a>
-            <a href="#" className="text-gray-700 hover:text-purple-600">
+            <a href="#statistics" className="text-gray-700 hover:text-purple-600">
               About
             </a>
-            <Button className="bg-purple-600 hover:bg-purple-700 text-white">Contact Us</Button>
+            <ContactModal
+              trigger={
+                <Button className="bg-purple-600 hover:bg-purple-700 text-white">
+                  Contact Us
+                </Button>
+              }
+            />
           </nav>
 
           {/* Mobile menu button */}
@@ -48,19 +56,28 @@ export default function Navbar() {
         {isMenuOpen && (
           <div className="md:hidden py-4">
             <div className="flex flex-col space-y-4">
-              <a href="#" className="text-gray-700 hover:text-purple-600 py-2">
+              <a href="#" onClick={() => setIsMenuOpen(false)} className="text-gray-700 hover:text-purple-600 py-2">
                 Home
               </a>
-              <a href="#" className="text-gray-700 hover:text-purple-600 py-2">
+              <a href="#features" onClick={() => setIsMenuOpen(false)} className="text-gray-700 hover:text-purple-600 py-2">
                 Features
               </a>
-              <a href="#pricing" className="text-gray-700 hover:text-purple-600 py-2">
+              <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="text-gray-700 hover:text-purple-600 py-2">
                 Pricing
               </a>
-              <a href="#" className="text-gray-700 hover:text-purple-600 py-2">
+              <a href="#statistics" onClick={() => setIsMenuOpen(false)} className="text-gray-700 hover:text-purple-600 py-2">
                 About
               </a>
-              <Button className="bg-purple-600 hover:bg-purple-700 text-white w-full">Contact Us</Button>
+              <ContactModal
+                trigger={
+                  <Button
+                    className="bg-purple-600 hover:bg-purple-700 text-white"
+
+                  >
+                    Contact Us
+                  </Button>
+                }
+              />
             </div>
           </div>
         )}
