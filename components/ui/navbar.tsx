@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-import Image from "next/image"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -13,7 +12,7 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <a href="/" className="flex items-center space-x-2">
-            <Image src="/logo.png" alt="3ata Logo" width={40} height={40} />
+            <img src="/logo.png" width="40" height="40" alt="3ata Logo" />
             <span className="text-2xl font-bold text-purple-900">3ata</span>
           </a>
 
