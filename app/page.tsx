@@ -309,10 +309,9 @@ export default function Home() {
       {/* Call to Action */}
       < section className="py-20 px-4 bg-purple-800 text-white" >
         <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Us in Transforming Mosque Communities</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Bismillah — let’s build something meaningful together!</h2>
           <p className="text-lg mb-8 text-purple-100">
-            With Allah's (SWT) help, we aim to make this vision a reality for every mosque. Join us in transforming the
-            way communities connect with their mosques.
+            3ata builds and delivers fully custom, feature-rich websites and mobile apps for mosques — with taqwa and sincere niyyah at the heart of everything we do. It’s what sets us apart. And if you're on a tight budget, reach out — we’re happy to support your vision, even at no cost.
           </p>
           <ContactModal
             trigger={
