@@ -45,7 +45,7 @@ export default function Home() {
             </div>
             <div className="md:w-1/2">
               <video
-                src="/demo.mp4"
+                src="/demo2.mp4"
                 width={600}
                 height={600}
                 className="rounded-xl shadow-xl"
