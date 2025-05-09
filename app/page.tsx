@@ -9,11 +9,26 @@ import ClientsMarquee from "@/components/marquee"
 import Stats from "@/components/stats"
 import ContactModal from "@/components/contact-us"
 import PremiumDialog from "@/components/premium-pricing-dialog"
+import Link from 'next/link'
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+
+      {/* Banner Section */}
+      <div className="relative bg-gradient-to-r from-green-900 to-green-800 text-white py-4 px-4 z-20">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <p className="text-lg">
+          We’re offering 5 masjids a free custom mobile app and website. Already have one? We’ll upgrade and unify it seamlessly.
+          </p>
+          <Link href="/apply">
+            <button className="bg-white text-green-800 px-6 py-2 rounded-lg text-base font-semibold hover:bg-gray-100 transition-all duration-200 transform hover:scale-105 shadow-lg">
+              Apply Now
+            </button>
+          </Link>
+        </div>
+      </div>
 
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-purple-50 to-white py-20 px-4">
@@ -56,19 +71,19 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* Statistics  */}
-      < section id="statistics" className="py-20 px-4 bg-purple-50" >
+      <section id="statistics" className="py-20 px-4 bg-purple-50">
         <div className="container mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-10 text-center">Tried & Trusted</h2>
           <Stats />
           <ClientsMarquee />
         </div>
-      </section >
+      </section>
 
       {/* Features Section */}
-      < section id="features" className="py-20 px-4 bg-white" >
+      <section id="features" className="py-20 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-12 text-center">
             Features Designed for Your Mosque
@@ -196,10 +211,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* Pricing Section */}
-      < section id="pricing" className="py-20 px-4 bg-purple-50" >
+      <section id="pricing" className="py-20 px-4 bg-purple-50">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-4 text-center">
             Simple, Transparent Pricing
@@ -304,26 +319,9 @@ export default function Home() {
             <p>No contracts. Cancel anytime. We're confident you'll love our service.</p>
           </div>
         </div>
-      </section >
-
-      {/* Call to Action */}
-      < section className="py-20 px-4 bg-purple-800 text-white" >
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Bismillah — let’s build something meaningful together!</h2>
-          <p className="text-lg mb-8 text-purple-100">
-            3ata builds and delivers fully custom, feature-rich websites and mobile apps for mosques — with taqwa and sincere niyyah at the heart of everything we do. It’s what sets us apart. And if you're on a tight budget, reach out — we’re happy to support your vision, even at no cost.
-          </p>
-          <ContactModal
-            trigger={
-              <Button className="bg-white text-purple-800 hover:bg-purple-100 px-8 py-6 text-lg">
-                Contact Us
-              </Button>
-            }
-          />
-        </div>
-      </section >
+      </section>
 
       <Footer />
-    </div >
+    </div>
   )
 }

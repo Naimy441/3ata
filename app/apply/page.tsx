@@ -1,6 +1,26 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function ApplyPage() {
+  const [showButton, setShowButton] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setShowButton(scrollPosition < 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToForm = () => {
+    const formSection = document.getElementById('application-form');
+    formSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Back Button */}
@@ -23,6 +43,30 @@ export default function ApplyPage() {
           </button>
         </Link>
       </div>
+
+      {/* Floating Action Button */}
+      {showButton && (
+        <button
+          onClick={scrollToForm}
+          className="fixed bottom-8 right-8 z-[100] bg-green-600 text-white p-4 rounded-full shadow-xl hover:bg-green-700 transition-all duration-300 animate-bounce-subtle hover:scale-110"
+          aria-label="Scroll to application form"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-6 w-6" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M19 14l-7 7m0 0l-7-7m7 7V3" 
+            />
+          </svg>
+        </button>
+      )}
 
       {/* Banner Section */}
       <div className="bg-gradient-to-r from-green-900 to-green-800 text-white py-16 px-4">
@@ -63,22 +107,42 @@ export default function ApplyPage() {
       </div>
 
       {/* Application Form Section */}
-      <div className="max-w-2xl mx-auto py-16 px-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8 backdrop-blur-sm bg-opacity-90">
-          <h2 className="text-3xl font-bold mb-8 text-gray-800 text-center">Apply for Your Digital Solution</h2>
+      <div id="application-form" className="max-w-3xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 lg:p-10 backdrop-blur-sm bg-opacity-95 border border-gray-100">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Apply for Your Digital Solution</h2>
+            <p className="text-gray-600 text-lg">Fill out the form below to get started with your custom mosque app</p>
+          </div>
           
-          <form action="https://formspree.io/f/xvgakyjg" method="POST" className="space-y-8">
-            <div className="space-y-2">
-              <label htmlFor="mosqueName" className="block text-sm font-medium text-gray-700">
-                Mosque Name *
-              </label>
-              <input
-                type="text"
-                id="mosqueName"
-                name="mosqueName"
-                required
-                className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200"
-              />
+          <form action="https://formspree.io/f/xvgakyjg" method="POST" className="space-y-6 sm:space-y-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+              <div className="space-y-2">
+                <label htmlFor="mosqueName" className="block text-sm font-medium text-gray-700">
+                  Mosque Name *
+                </label>
+                <input
+                  type="text"
+                  id="mosqueName"
+                  name="mosqueName"
+                  required
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200 text-base py-3 px-4"
+                  placeholder="Enter your mosque name"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+                  Your Role at the Mosque *
+                </label>
+                <input
+                  type="text"
+                  id="role"
+                  name="role"
+                  required
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200 text-base py-3 px-4"
+                  placeholder="e.g., Imam, Board Member, Admin"
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
@@ -90,73 +154,67 @@ export default function ApplyPage() {
                 name="address"
                 required
                 rows={3}
-                className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200"
+                className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200 text-base py-3 px-4"
+                placeholder="Enter your mosque's full address"
               />
             </div>
 
-            <div className="space-y-2">
-              <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-                Your Role at the Mosque *
-              </label>
-              <input
-                type="text"
-                id="role"
-                name="role"
-                required
-                className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200"
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+              <div className="space-y-2">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                  Your Email Address *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200 text-base py-3 px-4"
+                  placeholder="you@example.com"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                  Your Phone Number *
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200 text-base py-3 px-4"
+                  placeholder="(123) 456-7890"
+                />
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Your Email Address *
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200"
-                placeholder="We'll use this to get back to you"
-              />
-            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+              <div className="space-y-2">
+                <label htmlFor="website" className="block text-sm font-medium text-gray-700">
+                  Current Website (if any)
+                </label>
+                <input
+                  type="url"
+                  id="website"
+                  name="website"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200 text-base py-3 px-4"
+                  placeholder="https://your-mosque.com"
+                />
+              </div>
 
-            <div className="space-y-2">
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                Your Phone Number *
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                required
-                className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200"
-                placeholder="We'll use this to get back to you"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="website" className="block text-sm font-medium text-gray-700">
-                Current Website (if any)
-              </label>
-              <input
-                type="url"
-                id="website"
-                name="website"
-                className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="app" className="block text-sm font-medium text-gray-700">
-                Current Mobile App (if any)
-              </label>
-              <input
-                type="url"
-                id="app"
-                name="app"
-                className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200"
-              />
+              <div className="space-y-2">
+                <label htmlFor="app" className="block text-sm font-medium text-gray-700">
+                  Current Mobile App (if any)
+                </label>
+                <input
+                  type="url"
+                  id="app"
+                  name="app"
+                  className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200 text-base py-3 px-4"
+                  placeholder="App Store or Play Store link"
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
@@ -167,20 +225,37 @@ export default function ApplyPage() {
                 id="additionalInfo"
                 name="additionalInfo"
                 rows={4}
-                className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200"
+                className="mt-1 block w-full rounded-xl border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 transition-all duration-200 text-base py-3 px-4"
                 placeholder="Please share any additional information about your mosque and community that might help us better serve you."
               />
             </div>
 
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 px-6 rounded-lg hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02]"
-            >
-              Submit Application
-            </button>
+            <div className="pt-4">
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 px-6 rounded-xl text-lg font-semibold hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
+              >
+                Submit Application
+              </button>
+            </div>
           </form>
         </div>
       </div>
+
+      <style jsx global>{`
+        @keyframes bounce-subtle {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        .animate-bounce-subtle {
+          animation: bounce-subtle 2s infinite;
+        }
+      `}</style>
     </div>
   );
 }
