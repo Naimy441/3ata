@@ -1,3 +1,5 @@
+'use client';
+
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -5,11 +7,98 @@ import { CheckCircle2, Contact } from "lucide-react"
 import FreeDialog from "../components/free-pricing-dialog"
 import Navbar from "../components/navbar"
 import Footer from "../components/footer"
-import ClientsMarquee from "@/components/marquee"
+import ClientsMarquee from "@/components/client-marquee"
 import Stats from "@/components/stats"
 import ContactModal from "@/components/contact-us"
 import PremiumDialog from "@/components/premium-pricing-dialog"
 import Link from 'next/link'
+import { motion } from "framer-motion"
+import { useRef } from 'react';
+import { Marquee } from "@/components/magicui/marquee";
+import { cn } from "@/lib/utils";
+
+const phones = [
+  { src: "/phones/phone1.png", alt: "Phone 1" },
+  { src: "/phones/phone2.png", alt: "Phone 2" },
+  { src: "/phones/phone3.png", alt: "Phone 3" },
+  { src: "/phones/phone4.png", alt: "Phone 4" },
+  { src: "/phones/phone5.png", alt: "Phone 5" },
+  { src: "/phones/phone6.png", alt: "Phone 6" },
+  { src: "/phones/phone7.png", alt: "Phone 7" },
+  { src: "/phones/phone8.png", alt: "Phone 8" },
+  { src: "/phones/phone9.png", alt: "Phone 9" },
+];
+
+type MarqueeColumnProps = {
+  phones: { src: string; alt: string }[];
+  direction?: 'up' | 'down';
+  offset?: number;
+};
+
+// MarqueeColumn component for seamless looping
+function MarqueeColumn({ phones, direction = 'up', offset = 0 }: MarqueeColumnProps) {
+  // direction: 'up' or 'down'
+  // offset: vertical offset in px
+  // height of one set: 828px
+  const marqueeHeight = 828;
+  const animation = direction === 'up' ? { y: [0, -marqueeHeight] } : { y: [0, marqueeHeight] };
+  return (
+    <div style={{ height: '100%', marginTop: offset }}>
+      <motion.div
+        className="flex flex-col items-center"
+        animate={animation}
+        transition={{ repeat: Infinity, repeatType: 'loop', duration: 8, ease: 'linear' }}
+        style={{ height: 'unset' }}
+      >
+        {[...phones, ...phones].map((phone, idx) => (
+          <img
+            key={phone.alt + idx}
+            src={phone.src}
+            alt={phone.alt}
+            className="w-[130px] h-[260px] object-contain mb-4"
+          />
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
+function PhoneCard({ src, alt }: { src: string; alt: string }) {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="w-[130px] h-[260px] object-contain"
+      draggable={false}
+    />
+  );
+}
+
+export function MarqueeDemoVerticalPhones() {
+  const colSize = Math.ceil(phones.length / 3);
+  const firstCol = phones.slice(0, colSize);
+  const secondCol = phones.slice(colSize, 2 * colSize);
+  const thirdCol = phones.slice(2 * colSize);
+  return (
+    <div className="relative flex h-[500px] w-full flex-row items-center justify-center overflow-hidden gap-2">
+      <Marquee pauseOnHover vertical className="[--duration:20s]">
+        {firstCol.map((phone) => (
+          <PhoneCard key={phone.alt} {...phone} />
+        ))}
+      </Marquee>
+      <Marquee reverse pauseOnHover vertical className="[--duration:20s]">
+        {secondCol.map((phone) => (
+          <PhoneCard key={phone.alt} {...phone} />
+        ))}
+      </Marquee>
+      <Marquee pauseOnHover vertical className="[--duration:20s]">
+        {thirdCol.map((phone) => (
+          <PhoneCard key={phone.alt} {...phone} />
+        ))}
+      </Marquee>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -20,7 +109,7 @@ export default function Home() {
       <div className="relative bg-gradient-to-r from-green-900 to-green-800 text-white py-4 px-4 z-20">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <p className="text-lg">
-          We’re offering 5 masjids a free custom mobile app and website. Already have one? We’ll upgrade and unify it seamlessly.
+            We're offering 5 masjids a free custom mobile app and website. Already have one? We'll upgrade and unify it seamlessly.
           </p>
           <Link href="/apply">
             <button className="bg-white text-green-800 px-6 py-2 rounded-lg text-base font-semibold hover:bg-gray-100 transition-all duration-200 transform hover:scale-105 shadow-lg">
@@ -31,7 +120,13 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-purple-50 to-white py-20 px-4">
+      <section className="relative bg-gradient-to-b from-purple-50 to-white py-20 px-4 overflow-hidden">
+        {/* Top and Bottom Blur Overlays (Desktop only) */}
+        <div className="hidden md:block pointer-events-none absolute top-0 left-0 w-full h-32 z-30" style={{background: 'linear-gradient(to bottom, rgba(245,243,255,0.95) 60%, transparent)'}} />
+        <div className="hidden md:block pointer-events-none absolute bottom-0 left-0 w-full h-32 z-30" style={{background: 'linear-gradient(to top, rgba(245,243,255,0.95) 60%, transparent)'}} />
+        {/* Remove left/right fade effects */}
+        {/* <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-purple-50 to-transparent z-10" /> */}
+        {/* <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-purple-50 to-transparent z-10" /> */}
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2">
@@ -58,15 +153,21 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="md:w-1/2">
+            
+            {/* Phone Showcase (Desktop only) */}
+            <div className="md:w-1/2 hidden md:flex">
+              <MarqueeDemoVerticalPhones />
+            </div>
+
+            {/* Mobile Demo Video (Mobile only) */}
+            <div className="w-full flex md:hidden justify-center items-center py-8">
               <video
                 src="/demo2.mp4"
-                width={600}
-                height={600}
-                className="rounded-xl shadow-xl"
                 autoPlay
+                loop
                 muted
                 playsInline
+                className="w-full max-w-xs rounded-xl shadow-lg border border-gray-200"
               />
             </div>
           </div>

@@ -13,7 +13,7 @@ const mosques = [
 
 export default function ClientsMarquee() {
     return (
-        <div className="relative overflow-hidden max-w-sm mx-auto py-4 pt-8 flex items-center justify-center">
+        <div className="relative overflow-hidden max-w-xs md:max-w-sm mx-auto py-4 pt-8 flex items-center justify-center">
             <Marquee pauseOnHover className="[--duration:16s] gap-4">
                 {mosques.map((mosque, idx) => (
                     <div key={idx} className="flex flex-col items-center">
@@ -27,8 +27,8 @@ export default function ClientsMarquee() {
                 ))}
             </Marquee>
             {/* Left and right fade gradients */}
-            <div className="hidden md:block pointer-events-none absolute top-0 left-0 w-full h-8 z-30 bg-gradient-to-b from-purple-50 to-transparent" />
-            <div className="hidden md:block pointer-events-none absolute bottom-0 left-0 w-full h-8 z-30 bg-gradient-to-t from-purple-50 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-purple-50"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-purple-50"></div>
         </div>
     );
 }
