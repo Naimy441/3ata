@@ -22,13 +22,16 @@ export default function PrivacyPolicyPage() {
           <div>
             <h2 className="font-semibold text-lg mb-2">1. Information Collection</h2>
             <p>
-              Our app is designed with your privacy in mind. We do not collect, store, or process personal information,
-              usage data, or analytics from users. The only exceptions are:
+              Our app is designed with your privacy in mind. We collect minimal diagnostic data to improve user experience, including:
             </p>
             <ul className="list-disc list-inside mt-2 ml-4 text-sm text-gray-700 space-y-1">
-              <li>Basic app download statistics.</li>
-              <li>Access timestamps when the app is used.</li>
+              <li>Basic app usage statistics (number of times the app is opened)</li>
+              <li>Navigation patterns within the app (which features are most used)</li>
+              <li>Access timestamps when the app is used</li>
             </ul>
+            <p className="mt-2">
+              We do not collect any sensitive personal information, and all diagnostic data is anonymized and used solely for improving the app experience.
+            </p>
           </div>
 
           <div>
