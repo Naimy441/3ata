@@ -19,7 +19,7 @@ export default function PremiumDialog() {
     setOpen(false)
     // Give the dialog time to close before redirecting
     setTimeout(() => {
-      window.open("https://buy.stripe.com/5kAdSM2K80Ve5XOfZ1", "_blank")
+      window.open("https://buy.stripe.com/5kQeVe1E63m91gK5HUdMI04", "_blank")
     }, 200)
   }
 
